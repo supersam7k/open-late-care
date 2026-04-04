@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Westside Urgent Care",
+    "status": "Open now",
+    "hours": "Open until 10:00 PM",
+    "address": "1234 Wilshire Blvd, Los Angeles, CA",
+    "phone": "(323) 555-0147",
+    "badges": ["Walk-ins welcome", "Open late", "X-ray on site"],
+    "note": "Good fit for non-emergency injuries, cold and flu symptoms, and same-day care."
+  },
+  {
+    "name": "Sunset QuickCare Clinic",
+    "status": "Open now",
+    "hours": "Open until 11:00 PM",
+    "address": "2840 Sunset Blvd, Los Angeles, CA",
+    "phone": "(213) 555-0112",
+    "badges": ["Open late", "Self-pay options", "Adult + pediatric"],
+    "note": "Strong option for evening visits when primary care offices are already closed."
+  }
+]
