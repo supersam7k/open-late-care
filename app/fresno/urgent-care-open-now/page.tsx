@@ -1,3 +1,9 @@
+export const metadata = {
+  title: "Urgent Care Open Now in Fresno (24 Hour & Late Night Clinics)",
+  description:
+    "Find urgent care centers open now in Fresno. Browse locations, hours, and contact info for late-night and 24-hour urgent care clinics.",
+};
+
 import ListingCard from "@/components/ListingCard";
 import { getLosAngelesUrgentCareListings } from "@/lib/listings";
 
@@ -32,4 +38,6 @@ export default function Page() {
     </main>
   );
 }
+
+
 
