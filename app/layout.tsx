@@ -4,6 +4,7 @@ import "./globals.css";
 
 const BASE_URL = "https://urgentcarenearme24.com";
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+const ADSENSE_ID = "ca-pub-7148799077582934";
 
 export const metadata: Metadata = {
   title: {
@@ -23,6 +24,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body style={{ margin: 0, fontFamily: "Arial, sans-serif", display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+        <Script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_ID}`}
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+
         {GA_ID && (
           <>
             <Script
