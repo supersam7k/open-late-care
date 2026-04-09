@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { cities, getCityListings, getCityName } from "@/lib/cityListings";
+import { cityDescriptions } from "@/lib/cityDescriptions";
 import { toSchemaOpeningHours } from "@/lib/parseHours";
 import { OpenNowBadge } from "@/components/OpenNowBadge";
 
@@ -42,6 +43,7 @@ export default async function Page({ params }: Props) {
   const { city } = await params;
   const cityName = getCityName(city);
   const listings = getCityListings(city);
+  const description = cityDescriptions[city];
 
   if (!cityName || !listings) {
     notFound();
@@ -65,6 +67,8 @@ export default async function Page({ params }: Props) {
     })),
   };
 
+  const otherCities = cities.filter((c) => c.slug !== city);
+
   return (
     <>
       <script
@@ -73,9 +77,12 @@ export default async function Page({ params }: Props) {
       />
       <main style={{ maxWidth: 900, margin: "0 auto", padding: "20px" }}>
         <h1 style={{ marginBottom: 8 }}>Urgent Care Open Now in {cityName}</h1>
-        <p style={{ color: "#555", marginBottom: 32 }}>
-          Find urgent care centers open now in {cityName}. Browse locations, hours, and contact information.
-        </p>
+
+        {description && (
+          <p style={{ color: "#555", lineHeight: 1.7, marginBottom: 32 }}>
+            {description}
+          </p>
+        )}
 
         <div style={{ display: "grid", gap: 20 }}>
           {listings.map((listing, i) => (
@@ -131,6 +138,20 @@ export default async function Page({ params }: Props) {
             </div>
           ))}
         </div>
+
+        {/* Cross-city navigation */}
+        <section style={{ marginTop: 56, borderTop: "1px solid #e0e0e0", paddingTop: 32 }}>
+          <h2 style={{ marginBottom: 16 }}>Find Urgent Care in Other Cities</h2>
+          <ul style={{ columns: 2, columnGap: 40, paddingLeft: 20, lineHeight: 2.2, margin: 0 }}>
+            {otherCities.map((c) => (
+              <li key={c.slug}>
+                <a href={`/${c.slug}/urgent-care-open-now/`} style={{ color: "#0070f3" }}>
+                  {c.name} Urgent Care Open Now
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
       </main>
     </>
   );
