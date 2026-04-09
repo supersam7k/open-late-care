@@ -17,6 +17,9 @@ export async function generateMetadata({ params }: Props) {
   return {
     title: `Urgent Care Open Now in ${cityName} (24 Hour & Late Night Clinics)`,
     description: `Find urgent care centers open now in ${cityName}. Browse locations, hours, and contact info for late-night and 24-hour urgent care clinics.`,
+    alternates: {
+      canonical: `/${city}/urgent-care-open-now/`,
+    },
   };
 }
 
@@ -30,7 +33,7 @@ export default async function Page({ params }: Props) {
   }
 
   return (
-    <main style={{ maxWidth: 900, margin: "0 auto", padding: "20px", fontFamily: "Arial, sans-serif" }}>
+    <main style={{ maxWidth: 900, margin: "0 auto", padding: "20px" }}>
       <h1 style={{ marginBottom: 8 }}>Urgent Care Open Now in {cityName}</h1>
       <p style={{ color: "#555", marginBottom: 32 }}>
         Find urgent care centers open now in {cityName}. Browse locations, hours, and contact information.

@@ -1,8 +1,15 @@
+import type { Metadata } from "next";
 import { cities } from "@/lib/cityListings";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default function Home() {
   return (
-    <main style={{ maxWidth: 800, margin: "0 auto", padding: "20px", fontFamily: "Arial, sans-serif" }}>
+    <main style={{ maxWidth: 800, margin: "0 auto", padding: "20px" }}>
       <h1>Find Urgent Care Near You (Open Now)</h1>
 
       <p>
