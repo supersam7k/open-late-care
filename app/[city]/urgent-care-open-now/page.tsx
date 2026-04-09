@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { cities, getCityListings, getCityName } from "@/lib/cityListings";
+import { OpenNowBadge } from "@/components/OpenNowBadge";
 
 type Props = {
   params: Promise<{ city: string }>;
@@ -53,6 +54,7 @@ export default async function Page({ params }: Props) {
           >
             <h2 style={{ margin: "0 0 10px", fontSize: "1.1rem", color: "#1a1a1a" }}>
               {listing.name}
+              <OpenNowBadge hours={listing.hours} />
             </h2>
 
             <div style={{ display: "grid", gap: 6, color: "#444", fontSize: "0.95rem" }}>
