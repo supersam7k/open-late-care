@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import "./globals.css";
 
 const BASE_URL = "https://urgentcarenearme24.com";
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+const GA_ID = "G-3ZSPLPH985";
 const ADSENSE_ID = "ca-pub-7148799077582934";
 
 export const metadata: Metadata = {
@@ -24,7 +23,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* AdSense verification — must be a real script tag in <head> for Google crawler */}
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}');`,
+          }}
+        />
         <script
           async
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_ID}`}
@@ -32,18 +36,6 @@ export default function RootLayout({
         />
       </head>
       <body style={{ margin: 0, fontFamily: "Arial, sans-serif", display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-        {GA_ID && (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-              strategy="afterInteractive"
-            />
-            <Script id="ga-init" strategy="afterInteractive">
-              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}');`}
-            </Script>
-          </>
-        )}
-
         <header style={{ background: "#0070f3", padding: "12px 20px" }}>
           <a
             href="/"
