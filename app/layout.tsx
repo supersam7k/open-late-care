@@ -23,14 +23,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body style={{ margin: 0, fontFamily: "Arial, sans-serif", display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-        <Script
+      <head>
+        {/* AdSense verification — must be a real script tag in <head> for Google crawler */}
+        <script
           async
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_ID}`}
           crossOrigin="anonymous"
-          strategy="afterInteractive"
         />
-
+      </head>
+      <body style={{ margin: 0, fontFamily: "Arial, sans-serif", display: "flex", flexDirection: "column", minHeight: "100vh" }}>
         {GA_ID && (
           <>
             <Script
