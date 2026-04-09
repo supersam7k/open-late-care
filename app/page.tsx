@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import { cities } from "@/lib/cityListings";
 
 export const metadata: Metadata = {
-  alternates: {
-    canonical: "/",
-  },
+  alternates: { canonical: "/" },
 };
 
 const faqItems = [
@@ -36,88 +34,101 @@ const faqItems = [
 
 export default function Home() {
   return (
-    <main style={{ maxWidth: 800, margin: "0 auto", padding: "20px" }}>
-
+    <>
       {/* Hero */}
-      <h1>Find Urgent Care Open Now Near You</h1>
-      <p style={{ fontSize: "1.1rem", color: "#444", lineHeight: 1.7 }}>
-        Need medical attention today? Our directory lists urgent care centers in major US cities with up-to-date hours so you can find a clinic that is open right now — no appointment needed.
-      </p>
-
-      {/* City Directory */}
-      <h2 style={{ marginTop: 40 }}>Browse Urgent Care by City</h2>
-      <ul style={{ lineHeight: "2.2", columns: 2, columnGap: 40, paddingLeft: 20 }}>
-        {cities.map((city) => (
-          <li key={city.slug}>
-            <a href={`/${city.slug}/urgent-care-open-now/`}>
-              {city.name}
-            </a>
-          </li>
-        ))}
-      </ul>
-
-      {/* Urgent Care vs ER */}
-      <h2 style={{ marginTop: 48 }}>Urgent Care vs. Emergency Room: Which Should You Choose?</h2>
-      <p style={{ color: "#444", lineHeight: 1.7 }}>
-        Knowing where to go when you are sick or injured can save you time, money, and stress. Here is a quick guide:
-      </p>
-
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginTop: 16 }}>
-        <div style={{ background: "#f0f9ff", border: "1px solid #bae0fd", borderRadius: 8, padding: "16px 20px" }}>
-          <h3 style={{ margin: "0 0 12px", color: "#0070f3" }}>Go to Urgent Care for:</h3>
-          <ul style={{ margin: 0, paddingLeft: 18, lineHeight: 2, color: "#333" }}>
-            <li>Colds, flu, fever</li>
-            <li>Ear or sinus infections</li>
-            <li>Minor cuts needing stitches</li>
-            <li>Sprains and minor fractures</li>
-            <li>Urinary tract infections</li>
-            <li>Rashes and skin infections</li>
-            <li>Mild asthma or allergic reactions</li>
-            <li>X-rays and lab tests</li>
-          </ul>
-        </div>
-        <div style={{ background: "#fff5f5", border: "1px solid #fcc", borderRadius: 8, padding: "16px 20px" }}>
-          <h3 style={{ margin: "0 0 12px", color: "#dc2626" }}>Go to the ER for:</h3>
-          <ul style={{ margin: 0, paddingLeft: 18, lineHeight: 2, color: "#333" }}>
-            <li>Chest pain or pressure</li>
-            <li>Difficulty breathing</li>
-            <li>Signs of stroke</li>
-            <li>Severe head injury</li>
-            <li>Heavy or uncontrolled bleeding</li>
-            <li>Loss of consciousness</li>
-            <li>Severe allergic reaction</li>
-            <li>Poisoning or overdose</li>
-          </ul>
+      <div style={{ background: "linear-gradient(135deg, #0057c2 0%, #0070f3 100%)", color: "#fff", padding: "56px 24px 48px" }}>
+        <div style={{ maxWidth: 900, margin: "0 auto" }}>
+          <h1 style={{ margin: "0 0 16px", fontSize: "2rem", lineHeight: 1.3 }}>
+            Find Urgent Care Open Now Near You
+          </h1>
+          <p style={{ margin: 0, fontSize: "1.1rem", lineHeight: 1.7, opacity: 0.9, maxWidth: 620 }}>
+            Browse urgent care centers in 40 major US cities with real hours and clinic details — no appointment needed.
+          </p>
         </div>
       </div>
-      <p style={{ color: "#666", fontSize: "0.9rem", marginTop: 12 }}>
-        If you are unsure whether your situation is an emergency, call 911 or go to your nearest ER. When in doubt, err on the side of caution.
-      </p>
 
-      {/* What to Expect */}
-      <h2 style={{ marginTop: 48 }}>What to Expect at an Urgent Care Visit</h2>
-      <p style={{ color: "#444", lineHeight: 1.7 }}>
-        Urgent care centers are designed to get you in and out quickly. Most visits follow this process:
-      </p>
-      <ol style={{ color: "#444", lineHeight: 2, paddingLeft: 20 }}>
-        <li><strong>Check in</strong> — Walk in or check in online at some locations. Bring your insurance card and a photo ID.</li>
-        <li><strong>Triage</strong> — A nurse or medical assistant will take your vitals and note your symptoms.</li>
-        <li><strong>See a provider</strong> — A physician, nurse practitioner, or physician assistant will examine you. Average wait time is 15–45 minutes.</li>
-        <li><strong>Treatment</strong> — You may receive treatment on-site, a prescription, lab work, or a referral depending on your condition.</li>
-        <li><strong>Discharge</strong> — You will receive discharge instructions and can typically follow up with your primary care doctor if needed.</li>
-      </ol>
+      <main style={{ maxWidth: 900, margin: "0 auto", padding: "40px 24px" }}>
 
-      {/* FAQ */}
-      <h2 style={{ marginTop: 48 }}>Frequently Asked Questions</h2>
-      <div style={{ display: "grid", gap: 16, marginTop: 8 }}>
-        {faqItems.map((item, i) => (
-          <div key={i} style={{ borderLeft: "3px solid #0070f3", paddingLeft: 16 }}>
-            <p style={{ margin: "0 0 6px", fontWeight: 700, color: "#1a1a1a" }}>{item.q}</p>
-            <p style={{ margin: 0, color: "#444", lineHeight: 1.7 }}>{item.a}</p>
+        {/* City Grid */}
+        <section id="cities">
+          <h2 style={{ margin: "0 0 20px" }}>Browse Urgent Care by City</h2>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: 12 }}>
+            {cities.map((city) => (
+              <a key={city.slug} href={`/${city.slug}/urgent-care-open-now/`} className="city-card">
+                {city.name} →
+              </a>
+            ))}
           </div>
-        ))}
-      </div>
+        </section>
 
-    </main>
+        {/* Urgent Care vs ER */}
+        <section style={{ marginTop: 64 }}>
+          <h2 style={{ margin: "0 0 12px" }}>Urgent Care vs. Emergency Room</h2>
+          <p style={{ color: "#555", lineHeight: 1.7, marginBottom: 20 }}>
+            Knowing where to go when you are sick or injured can save you time, money, and stress.
+          </p>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+            <div style={{ background: "#f0f9ff", border: "1px solid #bae0fd", borderRadius: 8, padding: "20px 24px" }}>
+              <h3 style={{ margin: "0 0 12px", color: "#0070f3" }}>Go to Urgent Care for:</h3>
+              <ul style={{ margin: 0, paddingLeft: 18, lineHeight: 2, color: "#333" }}>
+                <li>Colds, flu, fever</li>
+                <li>Ear or sinus infections</li>
+                <li>Minor cuts needing stitches</li>
+                <li>Sprains and minor fractures</li>
+                <li>Urinary tract infections</li>
+                <li>Rashes and skin infections</li>
+                <li>Mild asthma or allergic reactions</li>
+                <li>X-rays and lab tests</li>
+              </ul>
+            </div>
+            <div style={{ background: "#fff5f5", border: "1px solid #fcc", borderRadius: 8, padding: "20px 24px" }}>
+              <h3 style={{ margin: "0 0 12px", color: "#dc2626" }}>Go to the ER for:</h3>
+              <ul style={{ margin: 0, paddingLeft: 18, lineHeight: 2, color: "#333" }}>
+                <li>Chest pain or pressure</li>
+                <li>Difficulty breathing</li>
+                <li>Signs of stroke</li>
+                <li>Severe head injury</li>
+                <li>Heavy or uncontrolled bleeding</li>
+                <li>Loss of consciousness</li>
+                <li>Severe allergic reaction</li>
+                <li>Poisoning or overdose</li>
+              </ul>
+            </div>
+          </div>
+          <p style={{ color: "#777", fontSize: "0.875rem", marginTop: 12 }}>
+            If you are unsure, call 911 or go to your nearest ER. When in doubt, err on the side of caution.
+          </p>
+        </section>
+
+        {/* What to Expect */}
+        <section style={{ marginTop: 64 }}>
+          <h2 style={{ margin: "0 0 12px" }}>What to Expect at an Urgent Care Visit</h2>
+          <p style={{ color: "#555", lineHeight: 1.7, marginBottom: 16 }}>
+            Urgent care centers are designed to get you in and out quickly. Most visits follow this process:
+          </p>
+          <ol style={{ color: "#444", lineHeight: 2, paddingLeft: 20, margin: 0 }}>
+            <li><strong>Check in</strong> — Walk in or check in online at some locations. Bring your insurance card and a photo ID.</li>
+            <li><strong>Triage</strong> — A nurse or medical assistant will take your vitals and note your symptoms.</li>
+            <li><strong>See a provider</strong> — A physician, nurse practitioner, or physician assistant will examine you. Average wait time is 15–45 minutes.</li>
+            <li><strong>Treatment</strong> — You may receive treatment on-site, a prescription, lab work, or a referral depending on your condition.</li>
+            <li><strong>Discharge</strong> — You will receive discharge instructions and can follow up with your primary care doctor if needed.</li>
+          </ol>
+        </section>
+
+        {/* FAQ */}
+        <section style={{ marginTop: 64 }}>
+          <h2 style={{ margin: "0 0 20px" }}>Frequently Asked Questions</h2>
+          <div style={{ display: "grid", gap: 16 }}>
+            {faqItems.map((item, i) => (
+              <div key={i} style={{ background: "#fff", border: "1px solid #e0e0e0", borderRadius: 8, padding: "16px 20px" }}>
+                <p style={{ margin: "0 0 6px", fontWeight: 700, color: "#1a1a1a" }}>{item.q}</p>
+                <p style={{ margin: 0, color: "#555", lineHeight: 1.7 }}>{item.a}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+      </main>
+    </>
   );
 }

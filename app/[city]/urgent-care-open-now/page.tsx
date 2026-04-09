@@ -86,16 +86,7 @@ export default async function Page({ params }: Props) {
 
         <div style={{ display: "grid", gap: 20 }}>
           {listings.map((listing, i) => (
-            <div
-              key={i}
-              style={{
-                border: "1px solid #e0e0e0",
-                borderRadius: 8,
-                padding: "20px 24px",
-                background: "#fff",
-                boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
-              }}
-            >
+            <div key={i} className="listing-card">
               <h2 style={{ margin: "0 0 10px", fontSize: "1.1rem", color: "#1a1a1a" }}>
                 {listing.name}
                 <OpenNowBadge hours={listing.hours} />
@@ -139,18 +130,54 @@ export default async function Page({ params }: Props) {
           ))}
         </div>
 
+        {/* City FAQ */}
+        <section style={{ marginTop: 56 }}>
+          <h2 style={{ margin: "0 0 20px" }}>Urgent Care in {cityName} — Frequently Asked Questions</h2>
+          <div style={{ display: "grid", gap: 16 }}>
+            {[
+              {
+                q: `Is urgent care open on weekends in ${cityName}?`,
+                a: `Yes — most urgent care centers in ${cityName} are open on Saturdays and Sundays, typically from 8am to 8pm. Some locations have reduced Sunday hours, so check the listings above for exact weekend hours at each clinic.`,
+              },
+              {
+                q: `Do I need an appointment for urgent care in ${cityName}?`,
+                a: `No appointment is needed at most ${cityName} urgent care centers. Walk-ins are welcome at all locations listed above. Some clinics offer online check-in so you can hold your spot before you arrive and reduce your wait time.`,
+              },
+              {
+                q: `How much does urgent care cost in ${cityName}?`,
+                a: `A typical urgent care visit in ${cityName} costs between $100 and $200 without insurance for a basic exam. Additional services such as X-rays, lab tests, or stitches will increase the total. Most clinics will provide a cost estimate when you call, and many post self-pay rates on their website.`,
+              },
+              {
+                q: `Does urgent care in ${cityName} accept insurance?`,
+                a: `Most urgent care centers in ${cityName} accept major insurance plans including commercial insurance, Medicare, and Medicaid. Coverage and copays vary by plan and location, so call ahead to confirm your insurance is accepted before your visit.`,
+              },
+              {
+                q: `What is the wait time at urgent care in ${cityName}?`,
+                a: `Average wait times at ${cityName} urgent care centers are typically 15 to 45 minutes, though this varies by location and time of day. Early morning visits and weekday mornings tend to have the shortest waits. Using online check-in where available can also reduce your time in the waiting room.`,
+              },
+              {
+                q: `What can urgent care treat in ${cityName}?`,
+                a: `${cityName} urgent care centers treat a wide range of non-life-threatening conditions including colds, flu, infections, minor injuries, rashes, UTIs, and more. Many locations also provide X-rays, lab work, and vaccinations. For chest pain, difficulty breathing, or other emergencies, go to the nearest ER or call 911.`,
+              },
+            ].map((item, i) => (
+              <div key={i} style={{ background: "#fff", border: "1px solid #e0e0e0", borderRadius: 8, padding: "16px 20px" }}>
+                <p style={{ margin: "0 0 6px", fontWeight: 700, color: "#1a1a1a" }}>{item.q}</p>
+                <p style={{ margin: 0, color: "#555", lineHeight: 1.7 }}>{item.a}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* Cross-city navigation */}
         <section style={{ marginTop: 56, borderTop: "1px solid #e0e0e0", paddingTop: 32 }}>
           <h2 style={{ marginBottom: 16 }}>Find Urgent Care in Other Cities</h2>
-          <ul style={{ columns: 2, columnGap: 40, paddingLeft: 20, lineHeight: 2.2, margin: 0 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: 10 }}>
             {otherCities.map((c) => (
-              <li key={c.slug}>
-                <a href={`/${c.slug}/urgent-care-open-now/`} style={{ color: "#0070f3" }}>
-                  {c.name} Urgent Care Open Now
-                </a>
-              </li>
+              <a key={c.slug} href={`/${c.slug}/urgent-care-open-now/`} className="city-card" style={{ fontSize: "0.9rem" }}>
+                {c.name} →
+              </a>
             ))}
-          </ul>
+          </div>
         </section>
       </main>
     </>

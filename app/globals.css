@@ -1,26 +1,58 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --blue: #0070f3;
+  --blue-dark: #0057c2;
+  --border: #e0e0e0;
+  --text: #1a1a1a;
+  --muted: #555;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: #f8f9fa;
+  color: var(--text);
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+a {
+  color: var(--blue);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* City cards on homepage */
+.city-card {
+  display: block;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.city-card:hover {
+  border-color: var(--blue);
+  box-shadow: 0 2px 8px rgba(0, 112, 243, 0.12);
+  text-decoration: none;
+}
+
+/* Listing cards on city pages */
+.listing-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 24px;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  transition: box-shadow 0.15s;
+}
+
+.listing-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
