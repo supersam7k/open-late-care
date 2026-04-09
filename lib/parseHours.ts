@@ -8,6 +8,10 @@ const DAY: Record<string, number> = {
   Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6, Sun: 0,
 };
 
+const SCHEMA_DAY: Record<string, string> = {
+  Mon: "Mo", Tue: "Tu", Wed: "We", Thu: "Th", Fri: "Fr", Sat: "Sa", Sun: "Su",
+};
+
 function parseMinutes(t: string): number {
   const m = t.trim().match(/^(\d+)(am|pm)$/i);
   if (!m) return -1;
@@ -22,6 +26,48 @@ function dayInRange(day: number, start: number, end: number): boolean {
   if (start <= end) return day >= start && day <= end;
   // Wrapping range e.g. Mon(1)–Sun(0) covers all 7 days
   return day >= start || day <= end;
+}
+
+function timeToSchema(t: string): string {
+  const m = t.trim().match(/^(\d+)(am|pm)$/i);
+  if (!m) return "";
+  let h = parseInt(m[1]);
+  const meridiem = m[2].toLowerCase();
+  if (meridiem === "pm" && h !== 12) h += 12;
+  if (meridiem === "am" && h === 12) h = 0;
+  return `${h.toString().padStart(2, "0")}:00`;
+}
+
+// Returns Schema.org openingHours strings e.g. ["Mo-Fr 08:00-17:00", "Sa 09:00-12:00"]
+export function toSchemaOpeningHours(hours: string): string[] {
+  const results: string[] = [];
+
+  for (const segment of hours.split(",").map((s) => s.trim())) {
+    const spaceIdx = segment.search(/\s/);
+    if (spaceIdx === -1) continue;
+
+    const dayPart = segment.slice(0, spaceIdx).trim();
+    const timePart = segment.slice(spaceIdx).trim();
+
+    if (timePart.toLowerCase() === "closed") continue;
+
+    const dayParts = dayPart.split("–");
+    const d0 = SCHEMA_DAY[dayParts[0]?.trim()];
+    const d1 = dayParts.length > 1 ? SCHEMA_DAY[dayParts[1]?.trim()] : null;
+    if (!d0) continue;
+    const daySchema = d1 ? `${d0}-${d1}` : d0;
+
+    const timeParts = timePart.split("–");
+    if (timeParts.length !== 2) continue;
+
+    const open = timeToSchema(timeParts[0]);
+    const close = timeToSchema(timeParts[1]);
+    if (!open || !close) continue;
+
+    results.push(`${daySchema} ${open}-${close}`);
+  }
+
+  return results;
 }
 
 export function isOpenNow(hours: string): boolean {
