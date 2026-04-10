@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { cities, getCityListings, getCityName } from "@/lib/cityListings";
 import { cityDescriptions } from "@/lib/cityDescriptions";
 import { toSchemaOpeningHours } from "@/lib/parseHours";
-import { OpenNowBadge } from "@/components/OpenNowBadge";
+import { ListingsFilter } from "@/components/ListingsFilter";
 
 type Props = {
   params: Promise<{ city: string }>;
@@ -84,51 +84,7 @@ export default async function Page({ params }: Props) {
           </p>
         )}
 
-        <div style={{ display: "grid", gap: 20 }}>
-          {listings.map((listing, i) => (
-            <div key={i} className="listing-card">
-              <h2 style={{ margin: "0 0 10px", fontSize: "1.1rem", color: "#1a1a1a" }}>
-                {listing.name}
-                <OpenNowBadge hours={listing.hours} />
-              </h2>
-
-              <div style={{ display: "grid", gap: 6, color: "#444", fontSize: "0.95rem" }}>
-                <div>
-                  <strong>Address:</strong> {listing.address}
-                </div>
-                <div>
-                  <strong>Phone:</strong>{" "}
-                  <a href={`tel:${listing.phone.replace(/[^+\d]/g, "")}`} style={{ color: "#0070f3" }}>
-                    {listing.phone}
-                  </a>
-                </div>
-                <div>
-                  <strong>Hours:</strong> {listing.hours}
-                </div>
-              </div>
-
-              <div style={{ marginTop: 14 }}>
-                <a
-                  href={`https://www.google.com/maps/dir/?api=1&destination=${listing.mapsQuery}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    display: "inline-block",
-                    padding: "8px 16px",
-                    background: "#0070f3",
-                    color: "#fff",
-                    borderRadius: 6,
-                    textDecoration: "none",
-                    fontSize: "0.9rem",
-                    fontWeight: 600,
-                  }}
-                >
-                  Get Directions
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
+        <ListingsFilter listings={listings} />
 
         {/* City FAQ */}
         <section style={{ marginTop: 56 }}>

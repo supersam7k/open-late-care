@@ -39,6 +39,37 @@ function timeToSchema(t: string): string {
 }
 
 // Returns Schema.org openingHours strings e.g. ["Mo-Fr 08:00-17:00", "Sa 09:00-12:00"]
+export function isOpenWeekends(hours: string): boolean {
+  for (const segment of hours.split(",").map((s) => s.trim())) {
+    const spaceIdx = segment.search(/\s/);
+    if (spaceIdx === -1) continue;
+    const dayPart = segment.slice(0, spaceIdx).trim();
+    const timePart = segment.slice(spaceIdx).trim();
+    if (timePart.toLowerCase() === "closed") continue;
+    const dayParts = dayPart.split("–");
+    const d0 = DAY[dayParts[0]?.trim()];
+    const d1 = dayParts.length > 1 ? DAY[dayParts[1]?.trim()] : d0;
+    if (d0 === undefined || d1 === undefined) continue;
+    if (dayInRange(6, d0, d1) || dayInRange(0, d0, d1)) return true;
+  }
+  return false;
+}
+
+export function isOpenLate(hours: string): boolean {
+  // "Open late" = closes at 9pm (21:00) or later on at least one day
+  for (const segment of hours.split(",").map((s) => s.trim())) {
+    const spaceIdx = segment.search(/\s/);
+    if (spaceIdx === -1) continue;
+    const timePart = segment.slice(spaceIdx).trim();
+    if (timePart.toLowerCase() === "closed") continue;
+    const timeParts = timePart.split("–");
+    if (timeParts.length !== 2) continue;
+    const close = parseMinutes(timeParts[1]);
+    if (close >= 21 * 60) return true;
+  }
+  return false;
+}
+
 export function toSchemaOpeningHours(hours: string): string[] {
   const results: string[] = [];
 
