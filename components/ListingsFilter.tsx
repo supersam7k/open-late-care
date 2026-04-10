@@ -77,6 +77,27 @@ export function ListingsFilter({ listings }: { listings: Listing[] }) {
         </div>
       </div>
 
+      {/* Disclaimer */}
+      <div style={{
+        background: "#fffbeb",
+        border: "1px solid #fcd34d",
+        borderRadius: 8,
+        padding: "12px 16px",
+        marginBottom: 16,
+        fontSize: "0.875rem",
+        color: "#78350f",
+        display: "flex",
+        gap: 10,
+        alignItems: "flex-start",
+      }}>
+        <span style={{ flexShrink: 0 }}>⚠️</span>
+        <span>
+          <strong>Always call ahead to verify hours and availability.</strong> Clinic information on this site
+          may be outdated or inaccurate. Do not rely solely on this listing — confirm directly with the clinic
+          before visiting. For medical emergencies, call 911.
+        </span>
+      </div>
+
       {/* Insurance info callout */}
       <div style={{
         background: "#f0f9ff",
@@ -84,13 +105,13 @@ export function ListingsFilter({ listings }: { listings: Listing[] }) {
         borderRadius: 8,
         padding: "12px 16px",
         marginBottom: 24,
-        fontSize: "0.9rem",
+        fontSize: "0.875rem",
         color: "#1a1a1a",
         display: "flex",
         gap: 10,
         alignItems: "flex-start",
       }}>
-        <span style={{ fontSize: "1.1rem", flexShrink: 0 }}>ℹ️</span>
+        <span style={{ flexShrink: 0 }}>ℹ️</span>
         <span>
           <strong>Insurance:</strong> Most urgent care centers accept major PPO/HMO plans, Medicare, and Medicaid.
           Coverage varies — call the clinic directly to confirm your plan is accepted before your visit.
@@ -164,6 +185,12 @@ export function ListingsFilter({ listings }: { listings: Listing[] }) {
                     Open Late
                   </span>
                 )}
+                <a
+                  href={`mailto:corrections@urgentcarenearme24.com?subject=Incorrect listing: ${encodeURIComponent(listing.name)}&body=Clinic: ${encodeURIComponent(listing.name)}%0AAddress: ${encodeURIComponent(listing.address)}%0A%0AWhat's incorrect:%0A`}
+                  style={{ fontSize: "0.8rem", color: "#999", marginLeft: "auto" }}
+                >
+                  Report incorrect info
+                </a>
               </div>
             </div>
           ))}
