@@ -3,6 +3,7 @@ import { cities, getCityListings, getCityName } from "@/lib/cityListings";
 import { cityDescriptions } from "@/lib/cityDescriptions";
 import { toSchemaOpeningHours } from "@/lib/parseHours";
 import { ListingsFilter } from "@/components/ListingsFilter";
+import { BackToTop } from "@/components/BackToTop";
 
 type Props = {
   params: Promise<{ city: string }>;
@@ -76,6 +77,13 @@ export default async function Page({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <main style={{ maxWidth: 900, margin: "0 auto", padding: "20px" }}>
+        {/* Breadcrumb */}
+        <nav style={{ fontSize: "0.85rem", color: "#888", marginBottom: 16 }}>
+          <a href="/" style={{ color: "#0070f3" }}>Home</a>
+          <span style={{ margin: "0 8px" }}>›</span>
+          <span>{cityName}</span>
+        </nav>
+
         <h1 style={{ marginBottom: 8 }}>Urgent Care Open Now in {cityName}</h1>
 
         {description && (
@@ -136,6 +144,7 @@ export default async function Page({ params }: Props) {
           </div>
         </section>
       </main>
+      <BackToTop />
     </>
   );
 }

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { cities } from "@/lib/cityListings";
+import { CitySearch } from "@/components/CitySearch";
+import { BackToTop } from "@/components/BackToTop";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -52,13 +54,7 @@ export default function Home() {
         {/* City Grid */}
         <section id="cities">
           <h2 style={{ margin: "0 0 20px" }}>Browse Urgent Care by City</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: 12 }}>
-            {cities.map((city) => (
-              <a key={city.slug} href={`/${city.slug}/urgent-care-open-now/`} className="city-card">
-                {city.name} →
-              </a>
-            ))}
-          </div>
+          <CitySearch cities={cities} />
         </section>
 
         {/* Urgent Care vs ER */}
@@ -67,7 +63,7 @@ export default function Home() {
           <p style={{ color: "#555", lineHeight: 1.7, marginBottom: 20 }}>
             Knowing where to go when you are sick or injured can save you time, money, and stress.
           </p>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 20 }}>
             <div style={{ background: "#f0f9ff", border: "1px solid #bae0fd", borderRadius: 8, padding: "20px 24px" }}>
               <h3 style={{ margin: "0 0 12px", color: "#0070f3" }}>Go to Urgent Care for:</h3>
               <ul style={{ margin: 0, paddingLeft: 18, lineHeight: 2, color: "#333" }}>
@@ -129,6 +125,7 @@ export default function Home() {
         </section>
 
       </main>
+      <BackToTop />
     </>
   );
 }
