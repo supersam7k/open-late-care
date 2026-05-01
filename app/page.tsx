@@ -38,14 +38,48 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <div style={{ background: "linear-gradient(135deg, #0057c2 0%, #0070f3 100%)", color: "#fff", padding: "56px 24px 48px" }}>
-        <div style={{ maxWidth: 900, margin: "0 auto" }}>
-          <h1 style={{ margin: "0 0 16px", fontSize: "2rem", lineHeight: 1.3 }}>
-            Find Urgent Care Open Now Near You
-          </h1>
-          <p style={{ margin: 0, fontSize: "1.1rem", lineHeight: 1.7, opacity: 0.9, maxWidth: 620 }}>
-            Browse urgent care centers in 40 major US cities with real hours and clinic details — no appointment needed.
-          </p>
+      <div style={{ background: "linear-gradient(135deg, #0057c2 0%, #0070f3 100%)", color: "#fff", padding: "48px 24px" }}>
+        <div style={{ maxWidth: 900, margin: "0 auto", display: "flex", alignItems: "center", gap: 40, flexWrap: "wrap" }}>
+          <div style={{ flex: "1 1 300px" }}>
+            <h1 style={{ margin: "0 0 16px", fontSize: "2rem", lineHeight: 1.3 }}>
+              Find Urgent Care Open Now Near You
+            </h1>
+            <p style={{ margin: "0 0 24px", fontSize: "1.1rem", lineHeight: 1.7, opacity: 0.9 }}>
+              Browse urgent care centers in 40 major US cities with real hours and clinic details — no appointment needed.
+            </p>
+            <a
+              href="#cities"
+              style={{ display: "inline-block", background: "#fff", color: "#0057c2", fontWeight: 700, padding: "12px 24px", borderRadius: 8, textDecoration: "none", fontSize: "0.95rem" }}
+            >
+              Find Care Near You →
+            </a>
+          </div>
+          <div style={{ flex: "0 1 340px" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/HeroBanner_2.png"
+              alt="Urgent care center open late at night"
+              style={{ width: "100%", borderRadius: 12, boxShadow: "0 8px 32px rgba(0,0,0,0.35)", display: "block" }}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Feature strip */}
+      <div style={{ background: "#f0f9ff", borderBottom: "1px solid #bae0fd", padding: "20px 24px" }}>
+        <div style={{ maxWidth: 900, margin: "0 auto", display: "flex", justifyContent: "center", gap: 32, flexWrap: "wrap" }}>
+          {[
+            { src: "/images/Icon_1.png", label: "Open Now" },
+            { src: "/images/Icon_2.png", label: "Walk-Ins Welcome" },
+            { src: "/images/Icon_4.png", label: "Compassionate Care" },
+            { src: "/images/TrustBadge_1.png", label: "Verified Clinics" },
+          ].map(({ src, label }) => (
+            <div key={label} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8, minWidth: 90 }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={src} alt={label} style={{ width: 56, height: 56, objectFit: "contain" }} />
+              <span style={{ fontSize: "0.8rem", fontWeight: 700, color: "#0057c2", textAlign: "center", letterSpacing: 0.2 }}>{label}</span>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -53,8 +87,35 @@ export default function Home() {
 
         {/* City Grid */}
         <section id="cities">
+          <div style={{ borderRadius: 12, overflow: "hidden", marginBottom: 20, lineHeight: 0 }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/PageBanner_1.png"
+              alt="Urgent care locations across major US cities"
+              style={{ width: "100%", height: 160, objectFit: "cover", objectPosition: "center 40%", display: "block" }}
+            />
+          </div>
           <h2 style={{ margin: "0 0 20px" }}>Browse Urgent Care by City</h2>
           <CitySearch cities={cities} />
+        </section>
+
+        {/* 24/7 availability callout */}
+        <section style={{ marginTop: 64, display: "flex", gap: 32, alignItems: "center", background: "#f0f9ff", border: "1px solid #bae0fd", borderRadius: 12, padding: "32px", flexWrap: "wrap" }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/ContentImage_1.png"
+            alt="24/7 urgent care availability"
+            style={{ width: 200, flexShrink: 0, borderRadius: 10, display: "block" }}
+          />
+          <div style={{ flex: "1 1 260px" }}>
+            <h2 style={{ margin: "0 0 12px", color: "#0057c2" }}>Open Late. Available 24/7.</h2>
+            <p style={{ color: "#444", lineHeight: 1.7, margin: "0 0 12px" }}>
+              Whether it&apos;s 2am or a Sunday afternoon, urgent care centers are there when your primary care doctor isn&apos;t available. Many locations stay open until 10pm or later, and some operate around the clock.
+            </p>
+            <p style={{ color: "#444", lineHeight: 1.7, margin: 0 }}>
+              Use our city listings to check real hours for clinics near you before you go — so you never show up to a closed door.
+            </p>
+          </div>
         </section>
 
         {/* Urgent Care vs ER */}
@@ -98,17 +159,29 @@ export default function Home() {
 
         {/* What to Expect */}
         <section style={{ marginTop: 64 }}>
-          <h2 style={{ margin: "0 0 12px" }}>What to Expect at an Urgent Care Visit</h2>
-          <p style={{ color: "#555", lineHeight: 1.7, marginBottom: 16 }}>
-            Urgent care centers are designed to get you in and out quickly. Most visits follow this process:
-          </p>
-          <ol style={{ color: "#444", lineHeight: 2, paddingLeft: 20, margin: 0 }}>
-            <li><strong>Check in</strong> — Walk in or check in online at some locations. Bring your insurance card and a photo ID.</li>
-            <li><strong>Triage</strong> — A nurse or medical assistant will take your vitals and note your symptoms.</li>
-            <li><strong>See a provider</strong> — A physician, nurse practitioner, or physician assistant will examine you. Average wait time is 15–45 minutes.</li>
-            <li><strong>Treatment</strong> — You may receive treatment on-site, a prescription, lab work, or a referral depending on your condition.</li>
-            <li><strong>Discharge</strong> — You will receive discharge instructions and can follow up with your primary care doctor if needed.</li>
-          </ol>
+          <div style={{ display: "flex", gap: 36, alignItems: "flex-start", flexWrap: "wrap" }}>
+            <div style={{ flex: "1 1 280px" }}>
+              <h2 style={{ margin: "0 0 12px" }}>What to Expect at an Urgent Care Visit</h2>
+              <p style={{ color: "#555", lineHeight: 1.7, marginBottom: 16 }}>
+                Urgent care centers are designed to get you in and out quickly. Most visits follow this process:
+              </p>
+              <ol style={{ color: "#444", lineHeight: 2, paddingLeft: 20, margin: 0 }}>
+                <li><strong>Check in</strong> — Walk in or check in online at some locations. Bring your insurance card and a photo ID.</li>
+                <li><strong>Triage</strong> — A nurse or medical assistant will take your vitals and note your symptoms.</li>
+                <li><strong>See a provider</strong> — A physician, nurse practitioner, or physician assistant will examine you. Average wait time is 15–45 minutes.</li>
+                <li><strong>Treatment</strong> — You may receive treatment on-site, a prescription, lab work, or a referral depending on your condition.</li>
+                <li><strong>Discharge</strong> — You will receive discharge instructions and can follow up with your primary care doctor if needed.</li>
+              </ol>
+            </div>
+            <div style={{ flex: "0 1 300px" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/ContentImage_2.png"
+                alt="Family checking in at urgent care reception"
+                style={{ width: "100%", borderRadius: 12, boxShadow: "0 4px 20px rgba(0,0,0,0.12)", display: "block" }}
+              />
+            </div>
+          </div>
         </section>
 
         {/* FAQ */}

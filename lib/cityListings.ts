@@ -4,6 +4,11 @@ export type Listing = {
   phone: string;
   hours: string;
   mapsQuery: string;
+  // Enriched by scripts/enrich-listings.ts (run once, committed to repo)
+  rating?: number;
+  reviewCount?: number;
+  placeId?: string;
+  website?: string;
 };
 
 export type CityData = {
@@ -12,7 +17,8 @@ export type CityData = {
   listings: Listing[];
 };
 
-export const cities: CityData[] = [
+// Raw city data — enriched fields are merged in below
+const rawCities: CityData[] = [
   {
     slug: "los-angeles",
     name: "Los Angeles",
@@ -638,6 +644,26 @@ export const cities: CityData[] = [
     ],
   },
 ];
+
+// Merge enriched data (rating, reviewCount, placeId, website) into listings.
+// enrichedData.json is populated by running: npm run enrich
+// It is committed to the repo so no API calls happen at runtime or build time.
+let enriched: Record<string, Partial<Listing>> = {};
+try {
+  // Dynamic require so Next.js doesn't error if the file is empty/missing during initial setup
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  enriched = require('./enrichedData.json') as Record<string, Partial<Listing>>;
+} catch {
+  // enrichedData.json not yet generated — run `npm run enrich` to populate it
+}
+
+export const cities: CityData[] = rawCities.map((city) => ({
+  ...city,
+  listings: city.listings.map((listing) => ({
+    ...listing,
+    ...(enriched[listing.name] ?? {}),
+  })),
+}));
 
 export function getCityListings(slug: string): Listing[] | null {
   const city = cities.find((c) => c.slug === slug);

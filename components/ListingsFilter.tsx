@@ -141,10 +141,34 @@ export function ListingsFilter({ listings }: { listings: Listing[] }) {
         <div style={{ display: "grid", gap: 20 }}>
           {filtered.map((listing, i) => (
             <div key={i} className="listing-card">
-              <h2 style={{ margin: "0 0 10px", fontSize: "1.1rem", color: "#1a1a1a" }}>
+              <h2 style={{ margin: "0 0 6px", fontSize: "1.1rem", color: "#1a1a1a" }}>
                 {listing.name}
                 <OpenNowBadge hours={listing.hours} />
               </h2>
+
+              {listing.rating !== undefined && (
+                <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 10 }}>
+                  <StarRating rating={listing.rating} />
+                  <span style={{ fontSize: "0.85rem", fontWeight: 700, color: "#1a1a1a" }}>
+                    {listing.rating.toFixed(1)}
+                  </span>
+                  {listing.reviewCount !== undefined && (
+                    <span style={{ fontSize: "0.8rem", color: "#666" }}>
+                      ({listing.reviewCount.toLocaleString()} reviews)
+                    </span>
+                  )}
+                  {listing.placeId && (
+                    <a
+                      href={`https://search.google.com/local/reviews?placeid=${listing.placeId}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ fontSize: "0.78rem", color: "#0070f3", marginLeft: 2 }}
+                    >
+                      Google reviews ↗
+                    </a>
+                  )}
+                </div>
+              )}
 
               <div style={{ display: "grid", gap: 6, color: "#444", fontSize: "0.95rem" }}>
                 <div><strong>Address:</strong> {listing.address}</div>
@@ -155,6 +179,14 @@ export function ListingsFilter({ listings }: { listings: Listing[] }) {
                   </a>
                 </div>
                 <div><strong>Hours:</strong> {listing.hours}</div>
+                {listing.website && (
+                  <div>
+                    <strong>Website:</strong>{" "}
+                    <a href={listing.website} target="_blank" rel="noopener noreferrer" style={{ color: "#0070f3" }}>
+                      {new URL(listing.website).hostname.replace(/^www\./, "")}
+                    </a>
+                  </div>
+                )}
               </div>
 
               <div style={{ marginTop: 14, display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
@@ -175,6 +207,26 @@ export function ListingsFilter({ listings }: { listings: Listing[] }) {
                 >
                   Get Directions
                 </a>
+                {listing.website && (
+                  <a
+                    href={listing.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: "inline-block",
+                      padding: "8px 16px",
+                      background: "#fff",
+                      color: "#333",
+                      border: "1.5px solid #d0d0d0",
+                      borderRadius: 6,
+                      textDecoration: "none",
+                      fontSize: "0.9rem",
+                      fontWeight: 600,
+                    }}
+                  >
+                    Visit Website
+                  </a>
+                )}
                 {isOpenWeekends(listing.hours) && (
                   <span style={{ fontSize: "0.8rem", color: "#555", background: "#f5f5f5", padding: "4px 10px", borderRadius: 12 }}>
                     Open Weekends
@@ -197,5 +249,18 @@ export function ListingsFilter({ listings }: { listings: Listing[] }) {
         </div>
       )}
     </>
+  );
+}
+
+function StarRating({ rating }: { rating: number }) {
+  const full  = Math.floor(rating);
+  const half  = rating - full >= 0.5;
+  const empty = 5 - full - (half ? 1 : 0);
+  return (
+    <span style={{ color: "#f59e0b", fontSize: "0.95rem", letterSpacing: 1 }}>
+      {"★".repeat(full)}
+      {half ? "½" : ""}
+      {"☆".repeat(empty)}
+    </span>
   );
 }
