@@ -34,98 +34,103 @@ const faqItems = [
   },
 ];
 
+const features = [
+  { src: "/images/Icon_1.png", label: "Open Now" },
+  { src: "/images/Icon_2.png", label: "Walk-Ins Welcome" },
+  { src: "/images/Icon_4.png", label: "Compassionate Care" },
+];
+
 export default function Home() {
   return (
     <>
       {/* Hero */}
-      <div style={{ background: "linear-gradient(135deg, #0057c2 0%, #0070f3 100%)", color: "#fff", padding: "48px 24px" }}>
-        <div style={{ maxWidth: 900, margin: "0 auto", display: "flex", alignItems: "center", gap: 40, flexWrap: "wrap" }}>
-          <div style={{ flex: "1 1 300px" }}>
-            <h1 style={{ margin: "0 0 16px", fontSize: "2rem", lineHeight: 1.3 }}>
-              Find Urgent Care Open Now Near You
+      <div style={{ background: "linear-gradient(150deg, #003d8f 0%, #0057c2 50%, #0070f3 100%)", color: "#fff" }}>
+        <div style={{ maxWidth: 960, margin: "0 auto", padding: "56px 24px 0", display: "flex", alignItems: "flex-end", gap: 48, flexWrap: "wrap" }}>
+          {/* Text */}
+          <div style={{ flex: "1 1 320px", paddingBottom: 56 }}>
+            <p style={{ margin: "0 0 12px", fontSize: "0.8rem", fontWeight: 700, letterSpacing: 2, opacity: 0.7, textTransform: "uppercase" }}>
+              40+ Cities Nationwide
+            </p>
+            <h1 style={{ margin: "0 0 16px", fontSize: "2.25rem", lineHeight: 1.25, fontWeight: 800 }}>
+              Find Urgent Care<br />Open Near You
             </h1>
-            <p style={{ margin: "0 0 24px", fontSize: "1.1rem", lineHeight: 1.7, opacity: 0.9 }}>
-              Browse urgent care centers in 40 major US cities with real hours and clinic details — no appointment needed.
+            <p style={{ margin: "0 0 32px", fontSize: "1.05rem", lineHeight: 1.75, opacity: 0.88, maxWidth: 480 }}>
+              Real hours, real clinics — no appointment needed. Find a location that&apos;s open now in your city.
             </p>
             <a
               href="#cities"
-              style={{ display: "inline-block", background: "#fff", color: "#0057c2", fontWeight: 700, padding: "12px 24px", borderRadius: 8, textDecoration: "none", fontSize: "0.95rem" }}
+              style={{
+                display: "inline-block",
+                background: "#fff",
+                color: "#0057c2",
+                fontWeight: 700,
+                padding: "13px 28px",
+                borderRadius: 8,
+                textDecoration: "none",
+                fontSize: "0.95rem",
+                boxShadow: "0 4px 14px rgba(0,0,0,0.2)",
+              }}
             >
               Find Care Near You →
             </a>
           </div>
-          <div style={{ flex: "0 1 340px" }}>
+
+          {/* Photo — sits flush at bottom of hero */}
+          <div style={{ flex: "0 1 380px", alignSelf: "flex-end" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/HeroBanner_2.png"
               alt="Urgent care center open late at night"
-              style={{ width: "100%", borderRadius: 12, boxShadow: "0 8px 32px rgba(0,0,0,0.35)", display: "block" }}
+              style={{
+                width: "100%",
+                display: "block",
+                borderRadius: "12px 12px 0 0",
+                boxShadow: "0 -4px 40px rgba(0,0,0,0.3)",
+              }}
             />
           </div>
         </div>
       </div>
 
       {/* Feature strip */}
-      <div style={{ background: "#f0f9ff", borderBottom: "1px solid #bae0fd", padding: "20px 24px" }}>
-        <div style={{ maxWidth: 900, margin: "0 auto", display: "flex", justifyContent: "center", gap: 32, flexWrap: "wrap" }}>
-          {[
-            { src: "/images/Icon_1.png", label: "Open Now" },
-            { src: "/images/Icon_2.png", label: "Walk-Ins Welcome" },
-            { src: "/images/Icon_4.png", label: "Compassionate Care" },
-            { src: "/images/TrustBadge_1.png", label: "Verified Clinics" },
-          ].map(({ src, label }) => (
-            <div key={label} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8, minWidth: 90 }}>
+      <div style={{ background: "#fff", borderBottom: "1px solid #e8e8e8", padding: "28px 24px" }}>
+        <div style={{ maxWidth: 960, margin: "0 auto", display: "flex", justifyContent: "center", gap: 0, flexWrap: "wrap" }}>
+          {features.map(({ src, label }, i) => (
+            <div
+              key={label}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 10,
+                padding: "8px 48px",
+                borderRight: i < features.length - 1 ? "1px solid #e8e8e8" : "none",
+              }}
+            >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={src} alt={label} style={{ width: 56, height: 56, objectFit: "contain" }} />
-              <span style={{ fontSize: "0.8rem", fontWeight: 700, color: "#0057c2", textAlign: "center", letterSpacing: 0.2 }}>{label}</span>
+              <img src={src} alt={label} style={{ width: 52, height: 52, objectFit: "contain" }} />
+              <span style={{ fontSize: "0.85rem", fontWeight: 700, color: "#1a1a1a" }}>{label}</span>
             </div>
           ))}
         </div>
       </div>
 
-      <main style={{ maxWidth: 900, margin: "0 auto", padding: "40px 24px" }}>
+      <main style={{ maxWidth: 960, margin: "0 auto", padding: "48px 24px" }}>
 
         {/* City Grid */}
         <section id="cities">
-          <div style={{ borderRadius: 12, overflow: "hidden", marginBottom: 20, lineHeight: 0 }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/PageBanner_1.png"
-              alt="Urgent care locations across major US cities"
-              style={{ width: "100%", height: 160, objectFit: "cover", objectPosition: "center 40%", display: "block" }}
-            />
-          </div>
           <h2 style={{ margin: "0 0 20px" }}>Browse Urgent Care by City</h2>
           <CitySearch cities={cities} />
         </section>
 
-        {/* 24/7 availability callout */}
-        <section style={{ marginTop: 64, display: "flex", gap: 32, alignItems: "center", background: "#f0f9ff", border: "1px solid #bae0fd", borderRadius: 12, padding: "32px", flexWrap: "wrap" }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/ContentImage_1.png"
-            alt="24/7 urgent care availability"
-            style={{ width: 200, flexShrink: 0, borderRadius: 10, display: "block" }}
-          />
-          <div style={{ flex: "1 1 260px" }}>
-            <h2 style={{ margin: "0 0 12px", color: "#0057c2" }}>Open Late. Available 24/7.</h2>
-            <p style={{ color: "#444", lineHeight: 1.7, margin: "0 0 12px" }}>
-              Whether it&apos;s 2am or a Sunday afternoon, urgent care centers are there when your primary care doctor isn&apos;t available. Many locations stay open until 10pm or later, and some operate around the clock.
-            </p>
-            <p style={{ color: "#444", lineHeight: 1.7, margin: 0 }}>
-              Use our city listings to check real hours for clinics near you before you go — so you never show up to a closed door.
-            </p>
-          </div>
-        </section>
-
         {/* Urgent Care vs ER */}
-        <section style={{ marginTop: 64 }}>
+        <section style={{ marginTop: 72 }}>
           <h2 style={{ margin: "0 0 12px" }}>Urgent Care vs. Emergency Room</h2>
           <p style={{ color: "#555", lineHeight: 1.7, marginBottom: 20 }}>
             Knowing where to go when you are sick or injured can save you time, money, and stress.
           </p>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 20 }}>
-            <div style={{ background: "#f0f9ff", border: "1px solid #bae0fd", borderRadius: 8, padding: "20px 24px" }}>
+            <div style={{ background: "#f0f9ff", border: "1px solid #bae0fd", borderRadius: 10, padding: "20px 24px" }}>
               <h3 style={{ margin: "0 0 12px", color: "#0070f3" }}>Go to Urgent Care for:</h3>
               <ul style={{ margin: 0, paddingLeft: 18, lineHeight: 2, color: "#333" }}>
                 <li>Colds, flu, fever</li>
@@ -138,7 +143,7 @@ export default function Home() {
                 <li>X-rays and lab tests</li>
               </ul>
             </div>
-            <div style={{ background: "#fff5f5", border: "1px solid #fcc", borderRadius: 8, padding: "20px 24px" }}>
+            <div style={{ background: "#fff5f5", border: "1px solid #fcc", borderRadius: 10, padding: "20px 24px" }}>
               <h3 style={{ margin: "0 0 12px", color: "#dc2626" }}>Go to the ER for:</h3>
               <ul style={{ margin: 0, paddingLeft: 18, lineHeight: 2, color: "#333" }}>
                 <li>Chest pain or pressure</li>
@@ -158,38 +163,38 @@ export default function Home() {
         </section>
 
         {/* What to Expect */}
-        <section style={{ marginTop: 64 }}>
-          <div style={{ display: "flex", gap: 36, alignItems: "flex-start", flexWrap: "wrap" }}>
+        <section style={{ marginTop: 72 }}>
+          <div style={{ display: "flex", gap: 48, alignItems: "center", flexWrap: "wrap" }}>
+            <div style={{ flex: "0 1 360px" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/ContentImage_2.png"
+                alt="Family checking in at urgent care"
+                style={{ width: "100%", borderRadius: 12, boxShadow: "0 6px 24px rgba(0,0,0,0.1)", display: "block" }}
+              />
+            </div>
             <div style={{ flex: "1 1 280px" }}>
               <h2 style={{ margin: "0 0 12px" }}>What to Expect at an Urgent Care Visit</h2>
               <p style={{ color: "#555", lineHeight: 1.7, marginBottom: 16 }}>
                 Urgent care centers are designed to get you in and out quickly. Most visits follow this process:
               </p>
-              <ol style={{ color: "#444", lineHeight: 2, paddingLeft: 20, margin: 0 }}>
-                <li><strong>Check in</strong> — Walk in or check in online at some locations. Bring your insurance card and a photo ID.</li>
-                <li><strong>Triage</strong> — A nurse or medical assistant will take your vitals and note your symptoms.</li>
-                <li><strong>See a provider</strong> — A physician, nurse practitioner, or physician assistant will examine you. Average wait time is 15–45 minutes.</li>
-                <li><strong>Treatment</strong> — You may receive treatment on-site, a prescription, lab work, or a referral depending on your condition.</li>
-                <li><strong>Discharge</strong> — You will receive discharge instructions and can follow up with your primary care doctor if needed.</li>
+              <ol style={{ color: "#444", lineHeight: 2.1, paddingLeft: 20, margin: 0 }}>
+                <li><strong>Check in</strong> — Walk in or check in online. Bring your insurance card and a photo ID.</li>
+                <li><strong>Triage</strong> — A nurse will take your vitals and note your symptoms.</li>
+                <li><strong>See a provider</strong> — A physician or NP will examine you. Typical wait: 15–45 min.</li>
+                <li><strong>Treatment</strong> — Receive on-site care, a prescription, lab work, or a referral.</li>
+                <li><strong>Discharge</strong> — Leave with instructions and follow up with your doctor if needed.</li>
               </ol>
-            </div>
-            <div style={{ flex: "0 1 300px" }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/ContentImage_2.png"
-                alt="Family checking in at urgent care reception"
-                style={{ width: "100%", borderRadius: 12, boxShadow: "0 4px 20px rgba(0,0,0,0.12)", display: "block" }}
-              />
             </div>
           </div>
         </section>
 
         {/* FAQ */}
-        <section style={{ marginTop: 64 }}>
+        <section style={{ marginTop: 72 }}>
           <h2 style={{ margin: "0 0 20px" }}>Frequently Asked Questions</h2>
-          <div style={{ display: "grid", gap: 16 }}>
+          <div style={{ display: "grid", gap: 12 }}>
             {faqItems.map((item, i) => (
-              <div key={i} style={{ background: "#fff", border: "1px solid #e0e0e0", borderRadius: 8, padding: "16px 20px" }}>
+              <div key={i} style={{ background: "#fff", border: "1px solid #e8e8e8", borderRadius: 10, padding: "18px 20px" }}>
                 <p style={{ margin: "0 0 6px", fontWeight: 700, color: "#1a1a1a" }}>{item.q}</p>
                 <p style={{ margin: 0, color: "#555", lineHeight: 1.7 }}>{item.a}</p>
               </div>
