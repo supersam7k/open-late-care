@@ -44,51 +44,46 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <div style={{ background: "linear-gradient(150deg, #003d8f 0%, #0057c2 50%, #0070f3 100%)", color: "#fff" }}>
-        <div style={{ maxWidth: 960, margin: "0 auto", padding: "56px 24px 0", display: "flex", alignItems: "flex-end", gap: 48, flexWrap: "wrap" }}>
-          {/* Text */}
-          <div style={{ flex: "1 1 320px", paddingBottom: 56 }}>
-            <p style={{ margin: "0 0 12px", fontSize: "0.8rem", fontWeight: 700, letterSpacing: 2, opacity: 0.7, textTransform: "uppercase" }}>
-              40+ Cities Nationwide
-            </p>
-            <h1 style={{ margin: "0 0 16px", fontSize: "2.25rem", lineHeight: 1.25, fontWeight: 800 }}>
-              Find Urgent Care<br />Open Near You
-            </h1>
-            <p style={{ margin: "0 0 32px", fontSize: "1.05rem", lineHeight: 1.75, opacity: 0.88, maxWidth: 480 }}>
-              Real hours, real clinics — no appointment needed. Find a location that&apos;s open now in your city.
-            </p>
-            <a
-              href="#cities"
-              style={{
-                display: "inline-block",
-                background: "#fff",
-                color: "#0057c2",
-                fontWeight: 700,
-                padding: "13px 28px",
-                borderRadius: 8,
-                textDecoration: "none",
-                fontSize: "0.95rem",
-                boxShadow: "0 4px 14px rgba(0,0,0,0.2)",
-              }}
-            >
-              Find Care Near You →
-            </a>
-          </div>
-
-          {/* Photo — sits flush at bottom of hero */}
-          <div style={{ flex: "0 1 380px", alignSelf: "flex-end" }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/HeroBanner_2.png"
-              alt="Urgent care center open late at night"
-              style={{
-                width: "100%",
-                display: "block",
-                borderRadius: "12px 12px 0 0",
-                boxShadow: "0 -4px 40px rgba(0,0,0,0.3)",
-              }}
-            />
-          </div>
+      <div
+        style={{
+          position: "relative",
+          backgroundImage: "url(/images/HeroBanner_2.png)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          color: "#fff",
+          minHeight: 480,
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        {/* Dark overlay so text is readable */}
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(0,30,80,0.82) 0%, rgba(0,30,80,0.55) 60%, rgba(0,0,0,0.2) 100%)" }} />
+        <div style={{ position: "relative", maxWidth: 960, margin: "0 auto", padding: "72px 24px", width: "100%" }}>
+          <p style={{ margin: "0 0 12px", fontSize: "0.78rem", fontWeight: 700, letterSpacing: 2.5, opacity: 0.75, textTransform: "uppercase" }}>
+            40+ Cities Nationwide
+          </p>
+          <h1 style={{ margin: "0 0 16px", fontSize: "2.6rem", lineHeight: 1.2, fontWeight: 800, maxWidth: 560 }}>
+            Find Urgent Care<br />Open Near You
+          </h1>
+          <p style={{ margin: "0 0 36px", fontSize: "1.1rem", lineHeight: 1.75, opacity: 0.9, maxWidth: 500 }}>
+            Real hours, real clinics — no appointment needed. Find a location that&apos;s open now in your city.
+          </p>
+          <a
+            href="#cities"
+            style={{
+              display: "inline-block",
+              background: "#fff",
+              color: "#0057c2",
+              fontWeight: 700,
+              padding: "14px 32px",
+              borderRadius: 8,
+              textDecoration: "none",
+              fontSize: "1rem",
+              boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
+            }}
+          >
+            Find Care Near You →
+          </a>
         </div>
       </div>
 
@@ -108,8 +103,8 @@ export default function Home() {
               }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={src} alt={label} style={{ width: 52, height: 52, objectFit: "contain" }} />
-              <span style={{ fontSize: "0.85rem", fontWeight: 700, color: "#1a1a1a" }}>{label}</span>
+              <img src={src} alt={label} style={{ width: 72, height: 72, objectFit: "contain" }} />
+              <span style={{ fontSize: "0.9rem", fontWeight: 700, color: "#1a1a1a" }}>{label}</span>
             </div>
           ))}
         </div>
